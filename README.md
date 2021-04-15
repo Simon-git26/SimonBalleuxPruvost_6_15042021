@@ -15,3 +15,4 @@ Effectué:
 
 -Instalation de nodemon server npm install -g nodemon OK
 -Installer express : npm install express --save OK
+-Installation de body-parser    npm install body-parser --save OK
