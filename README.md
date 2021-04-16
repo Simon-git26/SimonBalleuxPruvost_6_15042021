@@ -16,3 +16,7 @@ Effectué:
 -Instalation de nodemon server npm install -g nodemon OK
 -Installer express : npm install express --save OK
 -Installation de body-parser    npm install body-parser --save OK
+-Intsaller Mongoose : npm install --save mongoose
+-Intsaller validation mongoose email user = npm install --save mongoose-unique-validator
+-Installer le package de cryptage pour les mot de passe : npm install --save bcrypt
+-Installer jsonwebtoken : npm install --save jsonwebtoken
