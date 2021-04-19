@@ -15,6 +15,8 @@ const Sauce = require('./models/Sauce');
 //Importer le router
 const userRoutes = require('./routes/user');
 
+//Importer le router sauce
+const sauceRoutes = require('./routes/sauce');
 
 //Crée une constant qui sera notre application
 const app = express();
@@ -42,45 +44,11 @@ app.use(express.json());
 
 
 
-app.post('/api/new-sauce', (req, res, next) => {
-    delete req.body._id;
-    const sauce = new Sauce({
-        ...req.body
-    });
-    sauce.save()
-    .then(() => res.status(201).json({ message: 'Objet enregistrer' }))
-    .catch(error => res.status(400).json({ error }));
-});
-
-
-//Tableau sauce
-app.use('api/new-sauce', (req, res, next) => {
-    const sauce = [
-        {
-            _id: 'oeihfzeoi',
-            title: 'Mon premier objet',
-            manufacturer: 'So Pekocko',
-            description: 'Les infos de mon premier objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            ingredient: 'du poivre',
-            userId: 'qsomihvqios',
-        },
-        {
-            _id: 'oeihfzeomoihi',
-            title: 'Mon deuxième objet',
-            manufacturer: 'So Pekocko',
-            description: 'Les infos de mon deuxième objet',
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-            ingredient: 'du poivre',
-            userId: 'qsomihvqios',
-        },
-    ];
-    res.status(200).json(sauce);
-});
-
 
 //En,registrer le routes
 app.use('/api/auth', userRoutes);
+
+app.use('/api/new-sauces', sauceRoutes);
 
 //Exporter cettte application pour que je puisse y accéder depuis les autre fichier de mon projet
 module.exports = app;
