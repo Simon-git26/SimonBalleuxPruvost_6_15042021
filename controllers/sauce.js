@@ -5,8 +5,11 @@ const mongoose = require('mongoose');
 const Sauce = require('../models/Sauce');
 
 
+
 exports.create = (req, res, next) => {
+    console.log(req.body);
     delete req.body._id;
+    
     const sauce = new Sauce({
         title: req.body.title,
         manufacturer: req.body.manufacturer,
