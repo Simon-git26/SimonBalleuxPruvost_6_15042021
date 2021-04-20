@@ -7,8 +7,6 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
-//Importer mes sauce route 
-const sauce = require('../routes/sauce');
 
 
 //enregistrement de new user

@@ -48,7 +48,7 @@ app.use(express.json());
 //En,registrer le routes
 app.use('/api/auth', userRoutes);
 
-app.use('/api/new-sauces', sauceRoutes);
+app.use('/api', sauceRoutes);
 
 //Exporter cettte application pour que je puisse y accéder depuis les autre fichier de mon projet
 module.exports = app;
