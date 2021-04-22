@@ -20,3 +20,4 @@ Effectué:
 -Intsaller validation mongoose email user = npm install --save mongoose-unique-validator
 -Installer le package de cryptage pour les mot de passe : npm install --save bcrypt
 -Installer jsonwebtoken : npm install --save jsonwebtoken
+-Installation de multer: npm install --save multer
