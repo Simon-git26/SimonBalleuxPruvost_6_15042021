@@ -9,7 +9,7 @@ const Sauce = require('../models/Sauce');
 exports.create = (req, res, next) => {
     console.log(req.body);
     delete req.body._id;
-    
+
     const sauce = new Sauce({
         title: req.body.title,
         manufacturer: req.body.manufacturer,
@@ -21,7 +21,6 @@ exports.create = (req, res, next) => {
     sauce.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error: error, message: "Erreur la" }));
-    next();
 };
 
 
@@ -30,8 +29,6 @@ exports.findAll = (req, res) => {
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error: "Une erreur ici !" }));
 };
-
-
 
 
 /*

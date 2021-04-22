@@ -4,8 +4,12 @@ const express = require('express');
 // Decalrer le router
 const router = express.Router();
 
+
 //Il faut le controler pour assossier les fonction au differente route
 const userCtrl = require('../controllers/user');
+
+/* //Importer le Middleware de securiter auth
+const auth = require('../middleware/auth'); */
 
 
 

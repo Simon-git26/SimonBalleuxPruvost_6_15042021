@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 //Importer Mongoose
 const mongoose = require('mongoose');
 
-//Importer le model mongoose Sauce
-const Sauce = require('./models/Sauce');
-
 
 //Importer le router
 const userRoutes = require('./routes/user');

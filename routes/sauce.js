@@ -3,7 +3,8 @@ const router = express.Router();
 
 const controllerSauce = require('../controllers/sauce');
 
-
+/* //Importer le Middleware de securiter auth
+const auth = require('../middleware/auth'); */
 
 
 router.post('/sauces', controllerSauce.create);
