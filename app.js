@@ -2,9 +2,6 @@
 //On importe Express
 const express = require('express');
 
-//Importer body parser
-const bodyParser = require('body-parser');
-
 //Importer Mongoose
 const mongoose = require('mongoose');
 
@@ -14,6 +11,12 @@ const userRoutes = require('./routes/user');
 
 //Importer le router sauce
 const sauceRoutes = require('./routes/sauce');
+
+
+//PATH on importe pour le chemin pour que sa donne accé au chemin ligne 48
+const path = require('path'); 
+
+
 
 //Crée une constant qui sera notre application
 const app = express();
@@ -40,7 +43,9 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 
-
+//Pour dire a express de servir le dossier images quand je fait une requete a /images je crée un middleware qui repond au requetes envoyé par images et qui serve 
+//le dossier static image donc on utilise la methode express.static mais on ne connais pas le chemins a l'avance donc on fait un const path
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //En,registrer le routes
 app.use('/api/auth', userRoutes);

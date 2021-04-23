@@ -9,6 +9,7 @@ const MIME_TYPES = {
     'image/png': 'png',
 };
 
+
 //Crée un objet de configuration pour multer
 //la fonction diskStorage de multer dit qu'on enregistre sur le disque
 const storage = multer.diskStorage({
@@ -22,6 +23,7 @@ const storage = multer.diskStorage({
         const name = file.originalname.split(' ').join('_')
         //Appliquez une extension au fichier donc retour a la ligne 6 pour crée les extensions
         const extension = MIME_TYPES[file.mimetype];
+        
         //On appel le callback, et on crée le file name entier donc le name du dessus + date.now + un point + l'extension sdu fichier
         callback(null, name + Date.now() + '.' + extension);
     }

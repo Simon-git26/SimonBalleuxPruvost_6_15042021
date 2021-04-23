@@ -8,10 +8,6 @@ const router = express.Router();
 //Il faut le controler pour assossier les fonction au differente route
 const userCtrl = require('../controllers/user');
 
-/* //Importer le Middleware de securiter auth
-const auth = require('../middleware/auth'); */
-
-
 
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
