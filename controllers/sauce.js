@@ -74,3 +74,41 @@ exports.deleteOneObject = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }));
 };
+
+
+//Systeme de Like/Dislake
+exports.likeSauce = (req, res) => {
+
+    const reqBody = req.body;
+    const like = reqBody.like;
+    const dislike = reqBody.dislike;
+    const userId = reqBody.userId;
+    const usersLiked = reqBody.usersLiked;
+    const usersDisliked = reqBody.usersDisliked;
+
+    Sauce.findOne({ _id: req.params.id })
+
+    .then(sauce => {
+        //Si le users like la sauce il se passera:
+        switch(like) {
+            case 1:
+                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le +1 
+
+                )
+            .then(() => res.status(200).json({ message: "Sauce Liké !" }))
+            .catch(error => res.status(400).json({ error }));
+            break;
+        }
+
+        //Si le user dislike:
+        switch(dislike) {
+            case -1:
+                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le -1 
+
+                )
+            .then(() => res.status(200).json({ message: "Sauce Disliké !"}))
+            .catch(error => res.status(400).json({ error }));
+            break;
+        }
+    });
+};

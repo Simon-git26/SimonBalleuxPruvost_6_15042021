@@ -22,5 +22,10 @@ router.delete('/sauces/:id', auth, multer, controllerSauce.deleteOneObject); // 
 
 
 
+//Like Dislake de sauce
+router.post('/sauces/:id/like', multer, controllerSauce.likeSauce);
+
+
+
 //Exporter le router
 module.exports = router;
