@@ -10,11 +10,15 @@ const auth = require('../middleware/auth');
 //Importer multer
 const multer = require('../middleware/multer-config');
 
-router.post('/sauces', auth, multer, controllerSauce.create);
+router.post('/sauces', auth, multer, controllerSauce.create); // Crée une sauce
 
-router.put('/sauces/:id', auth, multer, controllerSauce.modify);
+router.put('/sauces/:id', auth, multer, controllerSauce.modify); //Modifier un article
 
-router.get('/sauces', auth, controllerSauce.findAll);
+router.get('/sauces/:id', auth, controllerSauce.findOne); //Recuperer une sauce 
+
+router.get('/sauces', auth, controllerSauce.findAll); // Recuperer toute les sauce
+
+router.delete('/sauces/:id', auth, multer, controllerSauce.deleteOneObject); // Supprimer un produit
 
 
 
