@@ -20,8 +20,13 @@ exports.create = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         ingredient: objetSauce.mainPepper,
         heat: objetSauce.heat,
+        likes: 0,
+        dislikes: 0,
+        usersLiked: "",
+        usersDisliked: "",
         userId: objetSauce.userId
     });
+
     sauce.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error: error, message: "Erreur la" }));
@@ -64,12 +69,10 @@ exports.likeSauce = (req, res, next) => {
 
     const reqBody = req.body;
     const like = reqBody.like;
-    const dislike = reqBody.dislike;
     const userId = reqBody.userId;
-    const userLiked = reqBody.userLiked;
-    const userDisliked = reqBody.userDisliked;
 
     Sauce.findOne({ _id: req.params.id })
+    
 
     .then(sauce => {
         //Si le users like la sauce il se passera:
@@ -83,10 +86,7 @@ exports.likeSauce = (req, res, next) => {
             .then(() => res.status(200).json({ message: "Sauce Liké !" }))
             .catch(error => res.status(400).json({ error }));
             break;
-        }
 
-        //Si le user dislike:
-        switch(dislike) {
             case -1:
                 Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le -1 
                 {_id: req.params.id},
