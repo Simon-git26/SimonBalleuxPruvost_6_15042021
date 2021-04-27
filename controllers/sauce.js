@@ -19,6 +19,7 @@ exports.create = (req, res, next) => {
         description: objetSauce.description,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         ingredient: objetSauce.mainPepper,
+        heat: objetSauce.heat,
         userId: objetSauce.userId
     });
     sauce.save()
@@ -57,8 +58,54 @@ exports.findAll = (req, res) => {
 
 
 
+
+//Systeme de Like/Dislake
+exports.likeSauce = (req, res, next) => {
+
+    const reqBody = req.body;
+    const like = reqBody.like;
+    const dislike = reqBody.dislike;
+    const userId = reqBody.userId;
+    const userLiked = reqBody.userLiked;
+    const userDisliked = reqBody.userDisliked;
+
+    Sauce.findOne({ _id: req.params.id })
+
+    .then(sauce => {
+        //Si le users like la sauce il se passera:
+        switch(like) {
+            case +1:
+                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le +1 
+                    {_id: req.params.id},
+                    {$push: {userLiked: userId}, $inc: {like: +1}},
+                    console.log('Salut je suis +1')
+                )
+            .then(() => res.status(200).json({ message: "Sauce Liké !" }))
+            .catch(error => res.status(400).json({ error }));
+            break;
+        }
+
+        //Si le user dislike:
+        switch(dislike) {
+            case -1:
+                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le -1 
+                {_id: req.params.id},
+                {$push: {userDisliked: userId}, $inc: {dislike: -1}},
+                console.log('Bonjour je suis -1')
+                )
+            .then(() => res.status(200).json({ message: "Sauce Disliké !"}))
+            .catch(error => res.status(400).json({ error: error, message: "Recommence ca marche pas !" }));
+            break;
+        }
+    });
+};
+
+
+
+
+
 //Suprimer un article
-exports.deleteOneObject = (req, res, next) => {
+exports.deleteOneObject = (req, res) => {
     //Avant de supprimé l'objet de la base on va aller le chercher pour avoir l'url de l'image donc trouvé lobjet dans la base de donnée
     Sauce.findOne({ _id: req.params.id })
     //Quand on le trouve on extrait le nom du fichier a supprimer
@@ -76,39 +123,3 @@ exports.deleteOneObject = (req, res, next) => {
 };
 
 
-//Systeme de Like/Dislake
-exports.likeSauce = (req, res) => {
-
-    const reqBody = req.body;
-    const like = reqBody.like;
-    const dislike = reqBody.dislike;
-    const userId = reqBody.userId;
-    const usersLiked = reqBody.usersLiked;
-    const usersDisliked = reqBody.usersDisliked;
-
-    Sauce.findOne({ _id: req.params.id })
-
-    .then(sauce => {
-        //Si le users like la sauce il se passera:
-        switch(like) {
-            case 1:
-                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le +1 
-
-                )
-            .then(() => res.status(200).json({ message: "Sauce Liké !" }))
-            .catch(error => res.status(400).json({ error }));
-            break;
-        }
-
-        //Si le user dislike:
-        switch(dislike) {
-            case -1:
-                Sauce.updateOne( //Choisir l'article en question associé au user en question et envoyé le -1 
-
-                )
-            .then(() => res.status(200).json({ message: "Sauce Disliké !"}))
-            .catch(error => res.status(400).json({ error }));
-            break;
-        }
-    });
-};
