@@ -23,7 +23,7 @@ router.delete('/sauces/:id', auth, multer, controllerSauce.deleteOneObject); // 
 
 
 //Like Dislake de sauce
-router.post('/sauces/:id/like', multer, controllerSauce.likeSauce);
+router.post('/sauces/:id/like', auth, multer, controllerSauce.likeSauce);
 
 
 
