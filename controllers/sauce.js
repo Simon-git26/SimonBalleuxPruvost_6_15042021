@@ -22,8 +22,8 @@ exports.create = (req, res, next) => {
         heat: objetSauce.heat,
         likes: 0,
         dislikes: 0,
-        usersLiked: "",
-        usersDisliked: "",
+        usersLiked: [],
+        usersDisliked: [],
         userId: objetSauce.userId
     });
 
