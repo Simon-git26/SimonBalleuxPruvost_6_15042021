@@ -29,7 +29,7 @@ exports.create = (req, res, next) => {
 
     sauce.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
-    .catch(error => res.status(400).json({ error: error, message: "Erreur la" }));
+    .catch(error => res.status(400).json({ error }));
 };
 
 
@@ -50,7 +50,7 @@ exports.modify = (req, res, next) => {
 exports.findOne = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
-    .catch(error => res.status(400).json({ error: error, message: "Erreur trouvé"}));
+    .catch(error => res.status(400).json({ error }));
 };
 
 
@@ -58,7 +58,7 @@ exports.findOne = (req, res, next) => {
 exports.findAll = (req, res) => {
     Sauce.find()
     .then(sauces => res.status(200).json(sauces))
-    .catch(error => res.status(400).json({ error: "Une erreur ici !" }));
+    .catch(error => res.status(400).json({ error }));
 };
 
 
@@ -94,7 +94,7 @@ exports.likeSauce = (req, res, next) => {
                     console.log('Bonjour je suis -1')
                 )
             .then(() => res.status(200).json({ message: "Sauce Disliké !"}))
-            .catch(error => res.status(400).json({ error: error, message: "Recommence ca marche pas !" }));
+            .catch(error => res.status(400).json({ error }));
             break;
 
 
@@ -105,14 +105,11 @@ exports.likeSauce = (req, res, next) => {
                     console.log('Oui jannule')
                 )
                 .then(() => res.status(200).json({ message: "Like/Dislike annulé !"}))
-            .catch(error => res.status(400).json({ error: error, message: "Erreur sur l'annulation !" }));
+            .catch(error => res.status(400).json({ error }));
             break;
         }
     });
 };
-
-
-
 
 
 //Suprimer un article
@@ -127,7 +124,7 @@ exports.deleteOneObject = (req, res) => {
         fs.unlink(`images/${filename}`, () => {
             Sauce.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: "Objet bien supprimé ! "}))
-            .catch(error => res.status(400).json({ error: error, message: "Objet non suprimé erreur" }));
+            .catch(error => res.status(400).json({ error }));
         });
     })
     .catch(error => res.status(500).json({ error }));
