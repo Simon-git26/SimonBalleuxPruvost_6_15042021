@@ -14,11 +14,11 @@ exports.create = (req, res, next) => {
     delete objetSauce._id;
 
     const sauce = new Sauce({
-        title: objetSauce.name,
+        name: objetSauce.name,
         manufacturer: objetSauce.manufacturer,
         description: objetSauce.description,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        ingredient: objetSauce.mainPepper,
+        mainPepper: objetSauce.mainPepper,
         heat: objetSauce.heat,
         likes: 0,
         dislikes: 0,
