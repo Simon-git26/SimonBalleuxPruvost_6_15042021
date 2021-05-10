@@ -21,3 +21,4 @@ Effectué:
 -Installer le package de cryptage pour les mot de passe : npm install --save bcrypt
 -Installer jsonwebtoken : npm install --save jsonwebtoken
 -Installation de multer: npm install --save multer
+-Installation de dotenv : npm install --save dotenv

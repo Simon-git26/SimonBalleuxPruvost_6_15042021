@@ -16,6 +16,8 @@ const sauceRoutes = require('./routes/sauce');
 //PATH on importe pour le chemin pour que sa donne accé au chemin ligne 48
 const path = require('path'); 
 
+//Importer dotenv
+require('dotenv').config();
 
 
 //Crée une constant qui sera notre application
@@ -23,7 +25,7 @@ const app = express();
 
 
 //Mongoose conection a mon appli
-mongoose.connect('mongodb+srv://Simon:Lamotodu26.@cluster0.6mtmj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO_ENV,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
