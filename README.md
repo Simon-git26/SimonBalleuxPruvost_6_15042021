@@ -22,3 +22,6 @@ Effectué:
 -Installer jsonwebtoken : npm install --save jsonwebtoken
 -Installation de multer: npm install --save multer
 -Installation de dotenv : npm install --save dotenv
+-Instalation de password Validator : npm install password-validator 
+-Installation de helmet: npm install helmet
+-Installation de ratelimit : npm install --save express-rate-limit

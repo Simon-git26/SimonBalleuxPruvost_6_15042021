@@ -20,9 +20,25 @@ const path = require('path');
 require('dotenv').config();
 
 
+//Importer helmet
+const helmet = require('helmet');
+
 //Crée une constant qui sera notre application
 const app = express();
 
+//Helmet installer
+app.use(helmet());
+
+
+//Rate Limit
+const rateLimit = require('express-rate-limit');
+
+const  apiLimiter  =  rateLimit ( { 
+  windowMs : 15 * 60 * 1000 ,  // 15 minutes 
+  max : 3 // nb dessaie 3
+});
+
+app.use("/api/auth/login", apiLimiter);
 
 //Mongoose conection a mon appli
 mongoose.connect(process.env.MONGO_ENV,
@@ -36,7 +52,7 @@ mongoose.connect(process.env.MONGO_ENV,
 
  //------CORS----- cela permet a lappli d'acceder a l'API sans probleme
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_APP_URL);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();

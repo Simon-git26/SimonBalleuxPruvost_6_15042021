@@ -4,13 +4,20 @@ const bcrypt = require('bcrypt');
 
 //Importer le jsonwebtoken
 const jwt = require('jsonwebtoken');
+const { schema } = require('../models/User');
 
 const User = require('../models/User');
 
-
+//MOT DE PASSE FORT 
+var passwordValidator = require('./password-validator');
 
 //enregistrement de new user
 exports.signup = (req, res, next) => {
+    //password validator
+   var isValid = passwordValidator.validate(req.body.password);
+    if (!isValid) {
+        res.status(400).json({ error : "mot de passe non valide" });
+    }
     //Hacher le mot de passe
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -47,16 +54,16 @@ exports.login = (req, res, next) => {
                     userId: user._id,
                     token: jwt.sign(
                         { userId: user._id },
-                        'RANDOM_TOKEN_SECRET',
+                        process.env.TOKEN_SECRET_KEY_ENV,
                         { expiresIn: '24h'}
                     )
                 });
             })
-            .catch(error => res.status(500).json(error));
+            .catch(error => res.status(400).json(error));
         })
     .catch(error => {
         console.log(error);
-        res.status(500).json({ error });
+        res.status(404).json({ error });
     });
 
 };
